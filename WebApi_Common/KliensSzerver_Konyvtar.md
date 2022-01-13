@@ -7,6 +7,7 @@
 > A könyvtáros pultján működik.
 
 ### Látja a könyvtárban lévő könyvek listáját
+ha != "" a borrowername,  akkor kell a plusz 3 értéket listázni
 
 - Állapot
     - Bent van vagy ki van kölcsönözve
@@ -14,8 +15,9 @@
     - Mikorra kell visszavinnie
 
 ### Az érkező ügyfélhez ki tud adni könyvet
+kölcsönző neve megadása, dátum, határidő
 
-- Csak bent lévő könyveket tud kiadni
+- Csak bent lévő könyveket tud kiadni  -> borrowerName == ""
 - A könyv állapota megváltozik kölcsönzöttre
 - Letárolódnak az ügyfél adatai
     - Név
@@ -32,8 +34,10 @@
 > A könyvtárban lévő ügyfelek szmára fenntartott gépeken működik.
 
 ### Lekérheti a kölcsönözhető könyvek listáját
+ahol a borrowername üres
 
 ### Név megadásával tájékoztatást kap a kölcsönzéseiről
+egyenlő a borrowernamemel azt listázza ki az alábbi adatokkal:
 
 - Könyv adatai
 - Határidő

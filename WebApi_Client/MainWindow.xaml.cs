@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using WebApi_Client.DataProviders;
@@ -14,6 +15,7 @@ namespace WebApi_Client
         public MainWindow()
         {
             InitializeComponent();
+            UpdateBooksListBox();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs args)
@@ -31,6 +33,23 @@ namespace WebApi_Client
                 BooksListBox.UnselectAll();
             }
         }
+
+        /*private void LendBooks_Click(object sender, RoutedEventArgs arguments)
+        {
+            List<Book> selectedBooks = BooksListBox.SelectedItems.Cast<Book>().ToList();
+            if (!selectedBooks.Any())
+            {
+                MessageBox.Show("No books selected!");
+                return;
+            }
+
+            var window = new BorrowingDetailsWindow(selectedBooks);
+            if (window.ShowDialog() ?? false)
+            {
+                SetAvailableBookList();
+                SetBorrowedBookList();
+            }
+        }*/
 
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {

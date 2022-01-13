@@ -6,17 +6,32 @@
         xmlns:local="clr-namespace:WebApi_Client"
         mc:Ignorable="d"
         Title="Book manager" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
+    <TabControl>
+        <TabItem Header="Könyvtáros">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Content="Books" FontWeight="Bold" Margin="15,15,15,0"/>
+                <Label Grid.Row="0" Content="Books" FontWeight="Bold" Margin="15,15,15,0"/>
 
-        <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
+                <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
 
-        <Button Grid.Row="2" Content="Add new book" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="AddBook_Click" />
-    </Grid>
+                <Button Grid.Row="2" Content="Add new book" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="AddBook_Click" />
+            </Grid>
+        </TabItem>
+        <TabItem Header="Ügyfél">
+            <Grid>
+                <Label Grid.Row="0" Content="Books available for lending" FontWeight="Bold" Margin="15,15,15,0"/>
+                
+                <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
+
+                <Button Grid.Row="2" Content="Books lent by me" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="AddBook_Click" />
+            </Grid>
+        </TabItem>
+        
+    </TabControl>
+    
 </Window>
