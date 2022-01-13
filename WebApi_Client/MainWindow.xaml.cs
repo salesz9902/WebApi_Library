@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using WebApi_Client.DataProviders;
+using WebApi_Common.Models;
 
 namespace WebApi_Client
 {
@@ -27,12 +18,32 @@ namespace WebApi_Client
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs args)
         {
+            var selectedPerson = BooksListBox.SelectedItem as Book;
 
+            if (selectedPerson != null)
+            {
+                var window = new BookWindow(selectedPerson);
+                if (window.ShowDialog() ?? false)
+                {
+                    UpdateBooksListBox();
+                }
+
+                BooksListBox.UnselectAll();
+            }
         }
 
         private void AddBook_Click(object sender, RoutedEventArgs e)
         {
-
+            var window = new BookWindow(null);
+            if (window.ShowDialog() ?? false)
+            {
+                UpdateBooksListBox();
+            }
+        }
+        private void UpdateBooksListBox()
+        {
+            var books= BookDataProvider.GetBooks().ToList();
+            BooksListBox.ItemsSource = books;
         }
     }
 }

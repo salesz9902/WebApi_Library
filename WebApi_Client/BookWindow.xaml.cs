@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WebApi_Client.DataProviders;
 using WebApi_Common.Models;
 
 namespace WebApi_Client
@@ -43,7 +44,7 @@ namespace WebApi_Client
         }
 
         private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {   /*
+        {   
             if (ValidateBook())
             {
                 _book.Title = TitleTextBox.Text;
@@ -54,7 +55,7 @@ namespace WebApi_Client
 
                 DialogResult = true;
                 Close();
-            }*/
+            }
         }
 
         private bool ValidateBook()
