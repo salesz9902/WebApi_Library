@@ -16,6 +16,7 @@ namespace WebApi_Client
         {
             InitializeComponent();
             UpdateBooksListBox();
+            UpdateLentBooksListBox();
         }
 
         private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs args)
@@ -51,18 +52,48 @@ namespace WebApi_Client
             }
         }*/
 
-        private void AddBook_Click(object sender, RoutedEventArgs e)
-        {
-            var window = new BookWindow(null);
-            if (window.ShowDialog() ?? false)
-            {
-                UpdateBooksListBox();
-            }
-        }
         private void UpdateBooksListBox()
         {
             var books= BookDataProvider.GetBooks().ToList();
             BooksListBox.ItemsSource = books;
+        }
+
+        private void UpdateLentBooksListBox()
+        {
+            BooksListBox2.Items.Clear();
+            var books = BookDataProvider.GetBooks().ToList();
+            var addedBooks = 0;
+            for(int i = 0; i < books.Count; i++)
+            {
+                if(books[i].BorrowerName == "")
+                {
+                    BooksListBox2.Items.Add(books[i]);
+                    addedBooks++;
+                }
+            }
+            if (addedBooks == 0) BooksListBox2.Items.Add("No books available for lending.");
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (BooksListBox.SelectedIndex == -1)
+                return;
+
+            var books = BookDataProvider.GetBooks().ToList();
+            var book = books[BooksListBox.SelectedIndex];
+
+            BookWindow window = new BookWindow(book);
+            if (window.ShowDialog() ?? false)
+            {
+                UpdateBooksListBox();
+                UpdateLentBooksListBox();
+            }
+        }
+
+        private void BooksLentBy_Click(object sender, RoutedEventArgs e)
+        {
+            LentBooksList window = new LentBooksList();
+            window.ShowDialog();
         }
     }
 }

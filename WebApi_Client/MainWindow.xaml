@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebApi_Client"
         mc:Ignorable="d"
-        Title="Book manager" Height="450" Width="800">
+        Title="Book manager" Height="550" Width="1000">
     <TabControl>
         <TabItem Header="Könyvtáros">
             <Grid>
@@ -17,18 +17,23 @@
 
                 <Label Grid.Row="0" Content="Books" FontWeight="Bold" Margin="15,15,15,0"/>
 
-                <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
+                <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" />
 
-                <Button Grid.Row="2" Content="Add new book" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="AddBook_Click" />
+                <Button Grid.Row="2" Content="Lend" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="Button_Click" />
             </Grid>
         </TabItem>
         <TabItem Header="Ügyfél">
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Label Grid.Row="0" Content="Books available for lending" FontWeight="Bold" Margin="15,15,15,0"/>
                 
-                <ListBox x:Name="BooksListBox" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
+                <ListBox x:Name="BooksListBox2" Grid.Row="1" Margin="15" SelectionMode="Single" SelectionChanged="ListBox_SelectionChanged" />
 
-                <Button Grid.Row="2" Content="Books lent by me" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="AddBook_Click" />
+                <Button Grid.Row="2" Content="Books lent by me" Width="100" HorizontalAlignment="Right" Margin="15,0,15,15" Click="BooksLentBy_Click" />
             </Grid>
         </TabItem>
         

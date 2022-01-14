@@ -6,6 +6,7 @@ namespace WebApi_Server.Controllers
 {
     [ApiController]
     [Route("api/book")]
+    [Route("api/book/[action]")]
     public class BookController : Controller
     {
         [HttpGet]
@@ -39,6 +40,29 @@ namespace WebApi_Server.Controllers
 
             BookRepository.StoreBooks(books);
             return Ok();
+        }
+
+
+        [HttpPost, ActionName("lend")]
+        public ActionResult LendBook([FromBody] Book lentBook)
+        {
+            var books = BookRepository.GetBooks();
+
+            var book = books.FirstOrDefault(x => x.Id == lentBook.Id);
+            if (book != null)
+            {
+                if (book.BorrowerName != "" && lentBook.BorrowerName != "")
+                    return Problem("The book is already lent.");
+
+                book.BorrowDate = lentBook.BorrowDate;
+                book.BorrowerName = lentBook.BorrowerName;
+                book.ReturnDate = lentBook.ReturnDate;
+
+                BookRepository.StoreBooks(books);
+                return Ok(book);
+            }
+
+            return NotFound();
         }
 
         [HttpPut]
