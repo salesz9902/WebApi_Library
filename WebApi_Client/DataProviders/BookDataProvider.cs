@@ -44,5 +44,20 @@ namespace WebApi_Client.DataProviders
                 }
             }
         }
+
+        public static void LendBook(Book book)
+        {
+            using (var client = new HttpClient())
+            {
+                var rawData = JsonConvert.SerializeObject(book);
+                var content = new StringContent(rawData, Encoding.UTF8, "application/json");
+
+                var response = client.PostAsync(_url + "/lend", content).Result;
+                if (!response.IsSuccessStatusCode)
+                {
+                    throw new InvalidOperationException(response.StatusCode.ToString());
+                }
+            }
+        }
     }
 }

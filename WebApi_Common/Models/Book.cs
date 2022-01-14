@@ -29,17 +29,20 @@ namespace WebApi_Common.Models
             BorrowerName = "";
         }
 
-        public void Borrow(string borrowerName, DateTime borrowDate, DateTime returnDate)
+        public void Borrow(string borrowerName, DateTime borrowDate)
         {
             BorrowerName = borrowerName;
-            BorrowDate = borrowDate;
-            ReturnDate = returnDate;
+            BorrowDate = DateTime.Now;
+            ReturnDate = borrowDate.AddDays(30);
         }
 
 
         public override string ToString()
         {
-            return $"{Title}, {Author}, Published: {Published_Date}";
+            if (BorrowerName != "")
+                return $"{Title}, {Author}, Published: {Published_Date} | {BorrowerName} | {BorrowDate} | {ReturnDate}";
+            else
+                return $"{Title}, {Author}, Published: {Published_Date}";
         }
 
     }
