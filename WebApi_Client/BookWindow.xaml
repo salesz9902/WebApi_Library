@@ -5,32 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebApi_Client"
         mc:Ignorable="d"
-        Title="Add Book" Height="300" Width="400">
+        Title="Lend Book" Height="300" Width="400">
     <Grid>
         <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-            <RowDefinition Height="auto" />
-        </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Title:" Margin="10" />
-        <TextBox x:Name="TitleTextBox" Grid.Column="1" Grid.Row="0" Margin="10" />
+            <Label Grid.Column="0" Grid.Row="0" Content="Title:" Margin="10" />
+            <Label x:Name="TitleLabel" Grid.Column="1" Grid.Row="0" Margin="10" />
 
-        <Label Grid.Column="0" Grid.Row="1" Content="Author:" Margin="10" />
-        <TextBox x:Name="AuthorTextBox" Grid.Column="1" Grid.Row="1" Margin="10" />
+            <Label Grid.Column="0" Grid.Row="1" Content="Author:" Margin="10" />
+            <Label x:Name="AuthorLabel" Grid.Column="1" Grid.Row="1" Margin="10" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="Published Date::" Margin="10" />
-        <DatePicker x:Name="PublishedDatePicker" Grid.Column="1" Grid.Row="2" Margin="10" />
+            <Label Grid.Column="0" Grid.Row="2" Content="Published Date::" Margin="10" />
+            <DatePicker x:Name="PublishedDatePicker" Grid.Column="1" Grid.Row="2" Margin="10" IsEnabled="False" />
 
-    </Grid>
+            <Label Grid.Column="0" Grid.Row="3" Content="Name of the Borrower:" Margin="10" />
+            <TextBox x:Name="BorrowerNameTextBox" Grid.Column="1" Grid.Row="3" Margin="10" />
+            <CheckBox x:Name="noLent" Grid.Column="1" Content="Nobody lent" HorizontalAlignment="Left" Margin="10,10,0,0" Grid.Row="4" VerticalAlignment="Top" Checked="CheckBox_Checked" Unchecked="noLent_Unchecked"/>
 
-    <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom">
-        <Button x:Name="CreateButton" Content="Create" Width="80" Margin="10" Click="CreateButton_Click" />
-    </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom">
+            <Button x:Name="LendButton" Content="Lend" Width="80" Margin="10" Click="LendButton_Click" />
+        </StackPanel>
     </Grid>
 </Window>

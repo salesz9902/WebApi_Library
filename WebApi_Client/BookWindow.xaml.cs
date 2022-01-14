@@ -30,55 +30,65 @@ namespace WebApi_Client
             {
                 _book = book;
 
-                TitleTextBox.Text = _book.Title;
-                AuthorTextBox.Text = _book.Author;
+                TitleLabel.Content = _book.Title;
+                AuthorLabel.Content = _book.Author;
                 PublishedDatePicker.SelectedDate = _book.Published_Date;
 
-                CreateButton.Visibility = Visibility.Collapsed;
+                if (_book.BorrowerName == "")
+                {
+                    noLent.IsChecked = true;
+                    BorrowerNameTextBox.IsEnabled = false;
+                }
+
+                LendButton.Visibility = Visibility.Visible;
             }
             else
             {
                 _book = new Book();
-                CreateButton.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void CreateButton_Click(object sender, RoutedEventArgs e)
-        {   
-            if (ValidateBook())
-            {
-                _book.Title = TitleTextBox.Text;
-                _book.Author = AuthorTextBox.Text;
-                _book.Published_Date = PublishedDatePicker.SelectedDate.Value;
-
-                BookDataProvider.CreateBook(_book);
-
-                DialogResult = true;
-                Close();
+                LendButton.Visibility = Visibility.Hidden;
             }
         }
 
         private bool ValidateBook()
         {
-            if (string.IsNullOrEmpty(TitleTextBox.Text))
+           if (string.IsNullOrEmpty(BorrowerNameTextBox.Text) && !(bool)noLent.IsChecked)
             {
-                MessageBox.Show("Title should not be empty.");
+                MessageBox.Show("The Name of the Borrower field should not be empty.");
                 return false;
             }
 
-            if (string.IsNullOrEmpty(AuthorTextBox.Text))
-            {
-                MessageBox.Show("Author should not be empty.");
-                return false;
-            }
-
-            if (!PublishedDatePicker.SelectedDate.HasValue)
-            {
-                MessageBox.Show("Please select a date of published date.");
-                return false;
-            }
 
             return true;
+        }
+
+        private void LendButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ValidateBook())
+            {
+                if ((bool)noLent.IsChecked)
+                    _book.Borrow("", DateTime.Now);
+                else
+                    _book.Borrow(BorrowerNameTextBox.Text, DateTime.Now);
+                try
+                {
+                    BookDataProvider.LendBook(_book);
+                } catch (InvalidOperationException ex)
+                {
+                    MessageBox.Show("This book is already lent!");
+                } 
+                DialogResult = true;
+                Close();
+            }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            BorrowerNameTextBox.IsEnabled = false;
+        }
+
+        private void noLent_Unchecked(object sender, RoutedEventArgs e)
+        {
+            BorrowerNameTextBox.IsEnabled = true;
         }
     }
 }
