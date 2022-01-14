@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WebApi_Client"
         mc:Ignorable="d"
-        Title="LentBooksList" Height="300" Width="500">
+        Title="LentBooksList" Height="400" Width="650">
     <Grid>
         <Grid>
             <Grid>
