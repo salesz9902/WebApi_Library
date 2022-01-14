@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -55,8 +56,16 @@ namespace WebApi_Client
             {
                 MessageBox.Show("The Name of the Borrower field should not be empty.");
                 return false;
-            }
 
+            }
+            if (!Regex.Match(BorrowerNameTextBox.Text, "^[a-zA-Z]{4,}(?: [a-zA-Z]+)?(?: [a-zA-Z]+)?$").Success && !(bool)noLent.IsChecked)
+            {
+                
+                MessageBox.Show("Invalid name");
+                BorrowerNameTextBox.Focus();
+                return false;
+
+            }
 
             return true;
         }
